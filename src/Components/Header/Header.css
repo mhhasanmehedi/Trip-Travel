@@ -1,0 +1,37 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;   
+}
+.logo-style{
+    font-size: 30px;
+    font-weight: 700;
+    text-decoration: none;
+    color: black;
+}
+
+.logo-style:hover,.link-style:hover{
+    color: black;
+}
+.mainmenu ul{
+    display: flex;
+    list-style-type: none;
+    align-items: center;
+}
+.mainmenu ul li{
+    margin-left: 30px;
+    padding: 10px;
+}
+.link-style{
+    color: black;
+    text-transform: uppercase;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.mainmenu button{
+    background-color: orangered;
+    border: none;
+    text-transform: uppercase;
+    padding: 10px 20px;
+}

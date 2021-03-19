@@ -1,0 +1,18 @@
+.destination input{
+    width: 100%;
+    border: none;
+    outline: none;
+    padding: 10px;
+    border-radius: 5px;
+}
+.form{
+    background-color: #EFEFEF;
+    padding: 20px;
+}
+.search-btn{
+    background-color: orangered;
+    margin-top: 20px;
+}
+.destination img{
+    width: 100%;
+}
