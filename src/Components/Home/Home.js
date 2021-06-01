@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import vehicleData from '../../fakeData/data.json';
-import '../../../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import Vehicle from '../Vehicle/Vehicle';
 import './Home.css';
 

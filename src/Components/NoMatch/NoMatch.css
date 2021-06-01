@@ -1,21 +1,25 @@
-.NoMatch-style {
+.noMatch-wrapper{
+    background-image: url(../../images/Bg.png);
+    background-size: cover;
+    background-position: bottom;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.noMatch-inner {
     border-radius: 10px;
     width: 600px;
     padding: 50px;
     text-align: center;
+    box-shadow: -1px 2px 12px 2px rgb(26 160 160);    
+    background-color: #8edff5;
 }
 
-.NoMatch-style h1 {
+.noMatch-inner h1 {
     font-weight: 900;
-    font-size: 80px;
-}
-
-.NoMatch-style button {
-    background-color: #0145D4;
-    padding: 10px 40px;
-    border: none;
-    border-radius: 50px;
-    color: white;
+    font-size: 90px;
 }
 
 @media only screen and (max-width: 600px) {

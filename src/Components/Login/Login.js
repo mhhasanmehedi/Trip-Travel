@@ -1,6 +1,6 @@
-import { faFacebook, faGoogle } from '@fortawesome/free-brands-svg-icons';
+import { faFacebookF, faGithub, faGoogle } from '@fortawesome/free-brands-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { UserContext } from '../../App';
 import './Login.css';
 import firebase from "firebase/app";
@@ -10,6 +10,7 @@ import { useHistory, useLocation } from 'react-router';
 
 const Login = () => {
     const [loggedInUser, setLoggedInUser] = useContext(UserContext);
+    const [newUser, setNewUser] = useState(false);
     const history = useHistory();
     const location = useLocation();
     const { from } = location.state || { from: { pathname: '/' } };
@@ -19,41 +20,180 @@ const Login = () => {
     }
 
 
+    //Google sing in 
     const handleGoogleSignIn = () => {
-        var googleProvider = new firebase.auth.GoogleAuthProvider();
+        const googleProvider = new firebase.auth.GoogleAuthProvider();
         firebase.auth()
             .signInWithPopup(googleProvider)
-            .then((result) => {
-                const {displayName,email} = result.user;
-                const signInUser = {name: displayName,email};
+            .then(res => {
+                const { displayName, email, photoURL } = res.user;
+                const signInUser = {
+                    isSignIn: true,
+                    name: displayName,
+                    email: email,
+                    photo: photoURL
+                };
                 setLoggedInUser(signInUser);
                 history.replace(from);
-            }).catch((error) => {
-                var errorCode = error.code;
-                var errorMessage = error.message;
-                var email = error.email;
-                var credential = error.credential;
+            })
+            .catch(err => {
+                console.log('Google SignIn Error : ', err);
             });
     }
 
+    //facebook sign in
+    const handleFacebookSignIn = () => {
+        const facebookProvider = new firebase.auth.FacebookAuthProvider();
+        firebase
+            .auth()
+            .signInWithPopup(facebookProvider)
+            .then(res => {
+                const { displayName, email, photoURL } = res.user;
+                const signInUser = {
+                    isSignIn: true,
+                    name: displayName,
+                    email: email,
+                    photo: photoURL
+                };
+                setLoggedInUser(signInUser);
+                history.replace(from);
+            })
+            .catch(err => {
+                console.log('Facebook Sign In Error:', err);
+            });
+    }
+
+    //github sign in
+    const handleGithubSignIn = () => {
+        const githubProvider = new firebase.auth.GithubAuthProvider();
+        firebase
+            .auth()
+            .signInWithPopup(githubProvider)
+            .then((res) => {
+                const { email, photoURL } = res.user;
+                const {username} = res.additionalUserInfo;
+                const signInUser = {
+                    isSignIn: true,
+                    name: username,
+                    email: email,
+                    photo: photoURL
+                };
+                setLoggedInUser(signInUser);
+                history.replace(from);
+            })
+            .catch((err) => {
+                console.log('Facebook Sign In Error:', err);
+            });
+    }
+
+    //email password sign in
+    const handleBlur = (event) => {
+        let isFieldValid = true;
+
+        if (event.target.name === 'email') {
+            isFieldValid = /\S+@\S+\.\S+/.test(event.target.value);
+
+        }
+        if (event.target.name === 'password') {
+            const isPasswordValid = event.target.value.length >= 6;
+            const passwordHasNumber = /\d{1}/.test(event.target.value);
+            isFieldValid = isPasswordValid && passwordHasNumber;
+        }
+        if (isFieldValid) {
+            const newUserInfo = { ...loggedInUser };
+            newUserInfo[event.target.name] = event.target.value;
+            setLoggedInUser(newUserInfo);
+        }
+    }
+
+    const handleSubmit = (event) => {
+        if (newUser && loggedInUser.email && loggedInUser.password) {
+            firebase.auth().createUserWithEmailAndPassword(loggedInUser.email, loggedInUser.password)
+                .then(res => {
+                    const newUserInfo = { ...loggedInUser };
+                    newUserInfo.error = '';
+                    newUserInfo.success = true;
+                    setLoggedInUser(newUserInfo);
+                    history.replace(from);
+                    updateUserName(loggedInUser.name);
+                })
+                .catch(error => {
+                    const newUserInfo = { ...loggedInUser };
+                    newUserInfo.error = error.message;
+                    newUserInfo.success = false;
+                    setLoggedInUser(newUserInfo);
+                });
+        }
+
+        if (!newUser && loggedInUser.email && loggedInUser.password) {
+            firebase.auth().signInWithEmailAndPassword(loggedInUser.email, loggedInUser.password)
+                .then(res => {
+                    const newUserInfo = { ...loggedInUser };
+                    newUserInfo.error = '';
+                    newUserInfo.success = true;
+                    setLoggedInUser(newUserInfo);
+                    history.replace(from);
+                })
+                .catch(error => {
+                    const newUserInfo = { ...loggedInUser };
+                    newUserInfo.error = error.message;
+                    newUserInfo.success = false;
+                    setLoggedInUser(newUserInfo);
+                });
+        }
+
+        event.preventDefault();
+    }
+
+    const updateUserName = name => {
+        const user = firebase.auth().currentUser;
+
+        user.updateProfile({
+            displayName: name
+        })
+            .then(() => {
+                console.log("User name updated successfully");
+            })
+            .catch(error => {
+                console.log(error);
+            });
+
+    }
+
+
     return (
-        <div className="login-area">
-            <div>
-                <form action="">
-                    <h2>Login</h2>
-                    <input type="email" name="" id="" placeholder="Email" />
-                    <br />
-                    <input type="password" name="" id="" placeholder="Password" />
-                    <br />
-                    <label>
-                        <input type="checkbox" name="remember" /> Remember me
-                    </label>
-                    <button type="submit">Login</button>
+        <div className="login-wrapper">
+            <div className="login-inner">
+                <h3>LOGIN FORM</h3>
+                <form onSubmit={handleSubmit}>
+                    {newUser && <input type="text" class="form-control" placeholder="Your Name" id="name" required />}
+                    <input type="email" class="form-control" onBlur={handleBlur} placeholder="Your Email" name="email" id="email" required />
+                    <input type="password" class="form-control" onBlur={handleBlur} placeholder="Your Password" name="password" id="pwd" required />
+                    <button type="submit" class="form-control btn btn-info">{newUser ? 'Sign Up' : 'Sign In'}</button>
+
+                    {loggedInUser.error && <small style={{ color: 'red' }}>{loggedInUser.error}</small>}
+                    {loggedInUser.success && <small style={{ color: 'green' }}>User {newUser ? 'Created' : 'Logged In'} successfully</small>}
+
+                    {
+                        newUser &&
+                        <h6 className="mt-2 text-center">Already Have a Account ?
+                            <span style={{ textDecoration: "underline", cursor: "pointer" }} onClick={() => setNewUser(!newUser)}> Log in</span>
+                        </h6>
+                    }
+
+                    {
+                        !newUser &&
+                        <h6 className="mt-2 text-center">Don't Have  Account ?
+                            <span style={{ textDecoration: "underline", cursor: "pointer" }} onClick={() => setNewUser(!newUser)}> Create New Account</span>
+                        </h6>
+                    }
                 </form>
-                <h2 className="text-center m-2">Or</h2>
-                <button className="login-button"><i><FontAwesomeIcon icon={faFacebook}></FontAwesomeIcon></i> <span>Continue With Facebook</span></button>
-                <br />
-                <button onClick={handleGoogleSignIn} className="login-button"><i><FontAwesomeIcon icon={faGoogle}></FontAwesomeIcon></i> <span>Continue with Google</span></button>
+                <div className="social-btn">
+                    <p>Or</p>
+                    <span onClick={handleGoogleSignIn}><FontAwesomeIcon icon={faGoogle}></FontAwesomeIcon></span>
+                    <span onClick={handleFacebookSignIn}><FontAwesomeIcon icon={faFacebookF}></FontAwesomeIcon></span>
+                    <span onClick={handleGithubSignIn}><FontAwesomeIcon icon={faGithub}></FontAwesomeIcon></span>
+                </div>
             </div>
         </div>
     );

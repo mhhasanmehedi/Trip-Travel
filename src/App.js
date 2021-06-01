@@ -11,26 +11,36 @@ import NoMatch from './Components/NoMatch/NoMatch';
 export const UserContext = createContext();
 
 function App() {
-  const [loggedInUser, setLoggedInUser] = useState({});
+  const [loggedInUser, setLoggedInUser] = useState({
+    isSignIn: false,
+    name: "",
+    email: "",
+    password: "",
+    photo: "",
+    error: "",
+    success: ''
+  });
   return (
-    <UserContext.Provider value={[loggedInUser,setLoggedInUser]}>
+    <UserContext.Provider value={[loggedInUser, setLoggedInUser]}>
       <Router>
-        <Header />
         <Switch>
           <Route path="/home">
+            <Header />
             <Home />
           </Route>
-          <PrivateRoute path="/destination">
+          <PrivateRoute path="/destination/:name">
+            <Header />
             <Destination />
           </PrivateRoute>
           <Route path="/login">
             <Login />
           </Route>
           <Route exact path="/">
+            <Header />
             <Home />
           </Route>
           <Route path="*">
-            <NoMatch/>
+            <NoMatch />
           </Route>
         </Switch>
       </Router>

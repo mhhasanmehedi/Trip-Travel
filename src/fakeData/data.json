@@ -1,22 +1,22 @@
 [
     {
         "id":1,
-        "vehicle_name":"BIKE",
+        "vehicle_name":"bike",
         "image":"https://i.ibb.co/svN82nV/Frame.png"
     },
 {
     "id":2,
-    "vehicle_name":"CAR",
+    "vehicle_name":"car",
     "image":"https://i.ibb.co/RQQ4Vfp/Frame-2.png"
 },
 {
     "id":3,
-    "vehicle_name":"BUS",
+    "vehicle_name":"bus",
     "image":"https://i.ibb.co/zrP9bY4/Frame-1.png"
 },
 {
     "id":4,
-    "vehicle_name":"TRAIN",
+    "vehicle_name":"train",
     "image":"https://i.ibb.co/0J7Qp2D/Group.png"
     }
 ]
