@@ -1,58 +1,28 @@
 .book-details {
-    background-color: #e2effd;
     border-radius: 5px;
     background-color: rgb(142 223 245);
     box-shadow: -1px 2px 12px 2px rgb(26 160 160);
+    margin-top: 50px;
     padding: 10px;
   }
-  
-  .location {
-    background-color: tomato;
+  .location{
+    background-color: #138496;
     border-radius: 5px;
+    padding: 5px;
     color: white;
+    margin-bottom: 30px;
   }
-  
-  .transport-quality {
-    margin-top: 30px;
+  .transport-quality{    
     background-color: white;
-    border-radius: 10px;
-    padding: 30px;
+    border-radius: 5px;
+    padding: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+  }
+  .transport-quality h5{
+    text-transform: capitalize;
   }
   
-  .transport-image img {
-    height: 50px;
-    width: 50px;
-  }
   
-  .transport-name {
-    margin-left: 25px;
-    font-weight: 800;
-    font-size: 16px;
-  }
-  
-  .transport-capacity {
-    margin-left: 25px;
-    font-weight: 800;
-    font-size: 16px;
-  }
-  
-  .transport-cost {
-    margin-left: 60px;
-    font-weight: 800;
-    font-size: 16px;
-  }
-  
-  @media (max-width: 500px) {
-    .transport-cost {
-      margin-left: 140px;
-    }
-  }
-  
-  @media (max-width: 400px) {
-    .transport-capacity {
-      margin-left: 20px;
-    }
-    .transport-cost {
-      margin-left: 50px;
-    }
-  }

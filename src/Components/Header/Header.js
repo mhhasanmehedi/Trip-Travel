@@ -32,7 +32,7 @@ const Header = () => {
 
 
     return (
-        <Navbar bg="light" expand="lg">
+        <Navbar bg="info" expand="lg">
             <Container>
                 <Navbar.Brand href="/">
                     <img src={logo} height="60px" alt="" /><span style={{ color: 'black', marginLeft: '10px', fontSize: '20px', textTransform: 'uppercase', letterSpacing: '1px' }}>Trip Travel</span>

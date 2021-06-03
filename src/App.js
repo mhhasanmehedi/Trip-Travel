@@ -34,6 +34,7 @@ function App() {
             <Destination />
           </PrivateRoute>
           <PrivateRoute path="/book/:id">
+            <Header />
             <BookNow/>
           </PrivateRoute>
           <Route path="/login">
