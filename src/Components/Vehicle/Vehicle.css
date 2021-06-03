@@ -4,7 +4,6 @@
     border: 1px solid #ddd;
     background-color: rgb(142 223 245);
     border-radius: 10px;
-    margin-top: 180px;
     text-align: center;
     transition: .6s;
 }
@@ -18,3 +17,9 @@
     background-color: white;
     transform: scale(1.03);
 }
+
+@media only screen and (max-width: 600px) {
+    .single-vehicle-box{
+        margin-top: 5px;
+    }
+  } 

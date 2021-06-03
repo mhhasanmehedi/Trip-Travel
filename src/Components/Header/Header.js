@@ -10,7 +10,7 @@ import logo from '../../images/logo.png';
 
 const Header = () => {
     const [loggedInUser, setLoggedInUser] = useContext(UserContext);
-    const { id, name, email, photo, isSignIn } = loggedInUser;
+    const { id, name, email, photo, isSignIn, displayName } = loggedInUser;
 
 
     const handleSignOut = () => {

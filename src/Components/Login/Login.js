@@ -102,6 +102,7 @@ const Login = () => {
         if (isFieldValid) {
             const newUserInfo = { ...loggedInUser };
             newUserInfo[event.target.name] = event.target.value;
+            console.log(newUserInfo);
             setLoggedInUser(newUserInfo);
         }
     }
@@ -111,11 +112,12 @@ const Login = () => {
             firebase.auth().createUserWithEmailAndPassword(loggedInUser.email, loggedInUser.password)
                 .then(res => {
                     const newUserInfo = { ...loggedInUser };
+                    newUserInfo.isSignIn = true;
                     newUserInfo.error = '';
                     newUserInfo.success = true;
                     setLoggedInUser(newUserInfo);
-                    history.replace(from);
                     updateUserName(loggedInUser.name);
+                    history.replace(from);
                 })
                 .catch(error => {
                     const newUserInfo = { ...loggedInUser };
@@ -129,8 +131,10 @@ const Login = () => {
             firebase.auth().signInWithEmailAndPassword(loggedInUser.email, loggedInUser.password)
                 .then(res => {
                     const newUserInfo = { ...loggedInUser };
+                    newUserInfo.isSignIn = true;
                     newUserInfo.error = '';
                     newUserInfo.success = true;
+                    newUserInfo.name = res.user.displayName;
                     setLoggedInUser(newUserInfo);
                     history.replace(from);
                 })
@@ -147,7 +151,6 @@ const Login = () => {
 
     const updateUserName = name => {
         const user = firebase.auth().currentUser;
-
         user.updateProfile({
             displayName: name
         })
@@ -166,7 +169,7 @@ const Login = () => {
             <div className="login-inner">
                 <h3>LOGIN FORM</h3>
                 <form onSubmit={handleSubmit}>
-                    {newUser && <input type="text" class="form-control" placeholder="Your Name" id="name" required />}
+                    {newUser && <input type="text" class="form-control" onBlur={handleBlur} placeholder="Your Name" id="name" name="name" required />}
                     <input type="email" class="form-control" onBlur={handleBlur} placeholder="Your Email" name="email" id="email" required />
                     <input type="password" class="form-control" onBlur={handleBlur} placeholder="Your Password" name="password" id="pwd" required />
                     <button type="submit" class="form-control btn btn-info">{newUser ? 'Sign Up' : 'Sign In'}</button>

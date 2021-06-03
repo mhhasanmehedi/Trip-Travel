@@ -1,21 +1,22 @@
 import { faMapMarker, faMapMarkerAlt, faUser, faUserFriends } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React from 'react';
+import React, { useContext } from 'react';
 import { useParams } from 'react-router';
 import Map from '../Map/Map';
 import fakeData from '../../fakeData/data.json';
 import './BookNow.css';
 import bg from '../../images/Bg.png';
 import { Timeline, TimelineConnector, TimelineContent, TimelineDot, TimelineItem, TimelineSeparator } from '@material-ui/lab';
+import { UserContext } from '../../App';
 
 
 
 const BookNow = () => {
     const { id } = useParams();
+    const [place,setPlace] = useContext(UserContext);
 
     const transport = fakeData.find(transport => transport.id == id);
     const { location1, location2, image, vehicle_name, capacity, cost1, cost2, cost3 } = transport;
-
 
     return (
         <section style={{ backgroundImage: `url(${bg})`, height: '100vh', backgroundSize: 'cover', backgroundPosition: 'bottom center' }}>
@@ -24,8 +25,6 @@ const BookNow = () => {
                     <div className="col-md-4">
                         <div className="book-details">
                             <div className="location">
-                                {/* <h5><FontAwesomeIcon icon={faMapMarker} /> {location1}</h5>
-                                <h5><FontAwesomeIcon icon={faMapMarkerAlt} /> {location2}</h5> */}
                                 <Timeline align="alternate">
                                     <TimelineItem>
                                         <TimelineSeparator>

@@ -21,8 +21,9 @@ function App() {
     error: "",
     success: ''
   });
+  const [place, setPlace] = useState({});
   return (
-    <UserContext.Provider value={[loggedInUser, setLoggedInUser]}>
+    <UserContext.Provider value={[loggedInUser, setLoggedInUser,place,setPlace]}>
       <Router>
         <Switch>
           <Route path="/home">
