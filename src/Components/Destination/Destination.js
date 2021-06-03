@@ -1,7 +1,16 @@
 import React from 'react';
+import { useHistory, useParams } from 'react-router';
+import Map from '../Map/Map';
 import './Destination.css';
 
 const Destination = () => {
+    const { id } = useParams();
+    const history = useHistory();
+
+
+    const handelBook = () => {
+        history.push(`/book/${id}`)
+    }
 
     return (
         <div className="container destination">
@@ -9,27 +18,22 @@ const Destination = () => {
                 <div className="col-md-4">
                     <form className="my-5">
                         <div class="form-group">
-                            <label for="pickFrom">Pick From</label>
-                            <input type="text" class="form-control" id="pickForm" placeholder="Dhaka" />
+                            <label for="pickFrom">Pick From__</label>
+                            <input type="text" class="form-control" id="pickForm" placeholder="From" required />
                         </div>
                         <div class="form-group">
-                            <label for="pickTo">Pick To</label>
-                            <input type="text" class="form-control" id="pickTo" placeholder="Mymensingh" />
+                            <label for="pickTo">Pick To__</label>
+                            <input type="text" class="form-control" id="pickTo" placeholder="To" required />
                         </div>
-                        <button type="submit" class="btn btn-info form-control">Search</button>
+                        <div class="form-group">
+                            <label for="date">Date__</label>
+                            <input type="date" class="form-control" id="date" required />
+                        </div>
+                        <button type="submit" class="btn btn-info form-control" onClick={() => handelBook()}>Search</button>
                     </form>
                 </div>
                 <div className="col-md-8">
-                    <iframe
-                        className="my-5 w-100"
-                        title="Google Map"
-                        src="https://www.google.com/maps/embed/v1/directions?key=AIzaSyDMdlO3qKX7wG6u0KUkTJuVH9IUA57oAm4&origin=Bangladesh+&destination=Bangladesh+ Dhaka &avoid=tolls|highways"
-                        width="800"
-                        height="650"
-                        style={{ border: 0, borderRadius: "5px" }}
-                        allowFullScreen=""
-                        loading="lazy">
-                    </iframe>
+                    <Map />
                 </div>
             </div>
         </div>

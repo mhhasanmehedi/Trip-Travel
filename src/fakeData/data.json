@@ -2,21 +2,45 @@
     {
         "id":1,
         "vehicle_name":"bike",
-        "image":"https://i.ibb.co/svN82nV/Frame.png"
+        "image":"https://i.ibb.co/svN82nV/Frame.png",
+        "location1": "Mirpur",
+        "location2": "Dhanmondi",
+        "capacity": "4",
+        "cost1": "$90",
+        "cost2": "$70",
+        "cost3": "$50"
     },
 {
     "id":2,
     "vehicle_name":"car",
-    "image":"https://i.ibb.co/RQQ4Vfp/Frame-2.png"
+    "image":"https://i.ibb.co/RQQ4Vfp/Frame-2.png",
+    "location1": "Mirpur",
+    "location2": "Dhanmondi",
+    "capacity": "4",
+    "cost1": "$90",
+    "cost2": "$70",
+    "cost3": "$50"
 },
 {
     "id":3,
     "vehicle_name":"bus",
-    "image":"https://i.ibb.co/zrP9bY4/Frame-1.png"
+    "image":"https://i.ibb.co/zrP9bY4/Frame-1.png",
+    "location1": "Mirpur",
+    "location2": "Dhanmondi",
+    "capacity": "4",
+    "cost1": "$90",
+    "cost2": "$70",
+    "cost3": "$50"
 },
 {
     "id":4,
     "vehicle_name":"train",
-    "image":"https://i.ibb.co/0J7Qp2D/Group.png"
+    "image":"https://i.ibb.co/0J7Qp2D/Group.png",
+    "location1": "Mirpur",
+    "location2": "Dhanmondi",
+    "capacity": "4",
+    "cost1": "$90",
+    "cost2": "$70",
+    "cost3": "$50"
     }
 ]

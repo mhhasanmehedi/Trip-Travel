@@ -7,6 +7,7 @@ import Destination from './Components/Destination/Destination';
 import { createContext, useState } from 'react';
 import PrivateRoute from './Components/PrivateRoute/PrivateRoute';
 import NoMatch from './Components/NoMatch/NoMatch';
+import BookNow from './Components/BookNow/BookNow';
 
 export const UserContext = createContext();
 
@@ -28,9 +29,12 @@ function App() {
             <Header />
             <Home />
           </Route>
-          <PrivateRoute path="/destination/:name">
+          <PrivateRoute path="/destination/:id">
             <Header />
             <Destination />
+          </PrivateRoute>
+          <PrivateRoute path="/book/:id">
+            <BookNow/>
           </PrivateRoute>
           <Route path="/login">
             <Login />
