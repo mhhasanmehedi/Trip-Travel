@@ -35,7 +35,9 @@ const Header = () => {
         <Navbar bg="info" expand="lg">
             <Container>
                 <Navbar.Brand href="/">
-                    <img src={logo} height="60px" alt="" /><span style={{ color: 'black', marginLeft: '10px', fontSize: '20px', textTransform: 'uppercase', letterSpacing: '1px' }}>Trip Travel</span>
+                    <div className="logo">
+                        <img src={logo} alt="" /><span>Trip Travel</span>
+                    </div>
                 </Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
@@ -67,10 +69,10 @@ const Header = () => {
                                         </Popover>
                                     }
                                 >
-                                    <Nav.Link style={{ fontWeight: "700", color: "black",border:'1px solid #138496' }} className="ml-4">{name}</Nav.Link>
+                                    <Nav.Link style={{ fontWeight: "700", color: "black", border: '1px solid #138496' }} className="ml-4">{name}</Nav.Link>
                                 </OverlayTrigger>
                                 :
-                                <Nav.Link href="/Login" className="btn btn-info ml-4 text-white pl-3 pr-3">Login</Nav.Link>
+                                <Nav.Link href="/Login" className="btn btn-info ml-4 text-white pl-3 pr-3 border">Login</Nav.Link>
                         }
                     </Nav>
                 </Navbar.Collapse>
